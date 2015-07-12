@@ -1,4 +1,4 @@
-h264
+h264 [![GoDoc](http://godoc.org/github.com/opennota/h264?status.svg)](http://godoc.org/github.com/opennota/h264)
 ====
 
 H264 encoder and decoder using ffmpeg.
