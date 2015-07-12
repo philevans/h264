@@ -1,4 +1,4 @@
-package codec
+package h264
 
 import (
 	/*
@@ -37,12 +37,12 @@ import (
 	"unsafe"
 )
 
-type H264Decoder struct {
+type Decoder struct {
 	m C.h264dec_t
 }
 
-func NewH264Decoder(header []byte) (m *H264Decoder, err error) {
-	m = &H264Decoder{}
+func NewDecoder(header []byte) (m *Decoder, err error) {
+	m = &Decoder{}
 	r := C.h264dec_new(
 		&m.m,
 		(*C.uint8_t)(unsafe.Pointer(&header[0])),
@@ -54,7 +54,7 @@ func NewH264Decoder(header []byte) (m *H264Decoder, err error) {
 	return
 }
 
-func (m *H264Decoder) Decode(nal []byte) (f *image.YCbCr, err error) {
+func (m *Decoder) Decode(nal []byte) (f *image.YCbCr, err error) {
 	r := C.h264dec_decode(
 		&m.m,
 		(*C.uint8_t)(unsafe.Pointer(&nal[0])),

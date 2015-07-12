@@ -1,15 +1,15 @@
 /*
 
-Golang h264 decoder/encoder ffmpeg wrapper
+H264 decoder/encoder ffmpeg wrapper
 
 	var img *image.YCbCr
-	d, err = codec.NewH264Encoder(640, 480)
+	d, err = h264.NewEncoder(640, 480)
 	img, err = d.Encode(img)
 
-	d, err = codec.NewH264Decoder(pps)
+	d, err = h264.NewDecoder(pps)
 	img, err = d.Decode(nal)
 */
-package codec
+package h264
 
 import (
 	"reflect"

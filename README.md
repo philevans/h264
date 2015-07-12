@@ -1,7 +1,7 @@
-codec
+h264
 ====
 
-Golang h264 encoder and decoder.
+H264 encoder and decoder using ffmpeg.
 
 H264 encoding example:
 
@@ -10,7 +10,7 @@ w := 400
 h := 400
 var nal [][]byte
 
-c, _ := codec.NewH264Encoder(w, h, image.YCbCrSubsampleRatio420)
+c, _ := h264.NewEncoder(w, h, image.YCbCrSubsampleRatio420)
 nal = append(nal, c.Header)
 
 for i := 0; i < 60; i++ {
@@ -33,7 +33,7 @@ for {
 H264 decoding example:
 
 ```go
-dec, err := codec.NewH264Decoder(nal[0])
+dec, err := h264.NewDecoder(nal[0])
 for i, n := range nal[1:] {
 	img, err := dec.Decode(n)
 	if err == nil {

@@ -1,4 +1,4 @@
-package codec
+package h264
 
 import (
 
@@ -42,22 +42,21 @@ import (
 	"image"
 	"strings"
 	"unsafe"
-	//"log"
 )
 
-type H264Encoder struct {
+type Encoder struct {
 	m      C.h264enc_t
 	Header []byte
 	Pixfmt image.YCbCrSubsampleRatio
 	W, H   int
 }
 
-func NewH264Encoder(
+func NewEncoder(
 	w, h int,
 	pixfmt image.YCbCrSubsampleRatio,
 	opts ...string,
-) (m *H264Encoder, err error) {
-	m = &H264Encoder{}
+) (m *Encoder, err error) {
+	m = &Encoder{}
 	m.m.w = (C.int)(w)
 	m.m.h = (C.int)(h)
 	m.W = w
@@ -96,7 +95,7 @@ type h264Out struct {
 	Key  bool
 }
 
-func (m *H264Encoder) Encode(img *image.YCbCr) (out h264Out, err error) {
+func (m *Encoder) Encode(img *image.YCbCr) (out h264Out, err error) {
 	var f *C.AVFrame
 	if img == nil {
 		f = nil
